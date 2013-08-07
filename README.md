@@ -7,3 +7,7 @@ newslink
 * chinatimes_1.pl
 
 	http://www.chinatimes.com/
+
+* nownews_1.pl
+
+	http://www.nownews.com/
