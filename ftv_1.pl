@@ -11,7 +11,6 @@ my @lines = split(/\n/, $response->decoded_content);
 
 foreach my $line (@lines)
 {
-	#<a href="NewsContent.aspx?ntype=class&amp;sno=2013807L04M1" target="_parent">狂犬病延燒 學者疑誤判病毒來源</a>
 	next unless $line =~ /<a href="(NewsContent.aspx[^"]+)" target="_parent">(.*)<\/a>/;
 	my ($uri, $anchor) = ($1, $2);
 	$uri =~ s/&amp;/&/g;

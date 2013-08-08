@@ -22,7 +22,6 @@ do
 	$link_count = 0;
 	foreach my $line (@lines)
 	{
-		#<a href="/entry/224615">捐腎不能生育？　本土劇誤導挨批</a>
 		next unless $line =~ /<h5 class="slogan"><a href="(\/entry\/[^"]+)">(.*)<\/a>/;
 		my ($uri, $anchor) = ($1, $2);
 		printf "http://news.tvbs.com.tw%s\t%s\n", $uri, $anchor;
