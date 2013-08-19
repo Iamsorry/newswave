@@ -1,4 +1,4 @@
-newslink
+newswave
 ========
 
 * tokenfreq.pl
