@@ -51,12 +51,15 @@ foreach my $site (@sites)
 		chomp($line);
 		my ($url, $title) = split(/\t/, $line);
 		my @tokens = tokenize($title);
+print "$line\n", join(',', @tokens), "\n";
 		foreach my $token (@tokens)
 		{
 			$tokencnt{$token}++;
 		}
 	}
 }
+
+exit;
 
 # output to a file
 my $result = get_intname($INTDIR, $TODAYSTR);
@@ -90,7 +93,9 @@ sub tokenize
 	for(my $i = 0; $i < scalar(@chars) - 1; $i++)
 	{
 		my $token = $chars[$i] . $chars[$i+1];
-		if($token ne "..")
+		if($token ne ".."
+		&& $token !~ /[ ~!@#\$%^&*()`\-={}|\[\]\\;':"<>\?,\.\/]/
+		)
 		{
 			push(@tokens, $token);
 		}
