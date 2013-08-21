@@ -51,15 +51,12 @@ foreach my $site (@sites)
 		chomp($line);
 		my ($url, $title) = split(/\t/, $line);
 		my @tokens = tokenize($title);
-print "$line\n", join(',', @tokens), "\n";
 		foreach my $token (@tokens)
 		{
 			$tokencnt{$token}++;
 		}
 	}
 }
-
-exit;
 
 # output to a file
 my $result = get_intname($INTDIR, $TODAYSTR);
