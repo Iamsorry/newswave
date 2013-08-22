@@ -2,7 +2,12 @@ newswave
 ========
 
 * tokenfreq.pl
-	Prototype of token frenquency counter.
+
+	Prototype of token frequency counter.
+
+* freq2wave.pl
+
+	Prototype of token frequency chart data generator.
 
 * fetcher/
 	* appledaily_1.pl	http://www.appledaily.com.tw/
