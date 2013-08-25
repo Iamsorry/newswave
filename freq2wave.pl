@@ -4,8 +4,11 @@ use warnings;
 use strict;
 
 my $INTDIR = 'int';
-my $MAXRANK = 2;
-my $MINCOUNT = 2;
+#my $MAXRANK = 2;
+my $MINHOT = 12;
+my $MINCOUNT = 3;
+my @STOPLIST = ('「', '」', '〈', '〉', '／', '！',
+'快訊', '台灣', '政府', '總統');
 
 opendir(DH, $INTDIR) || die "failed to open $INTDIR: $!";
 my @files = sort {$a cmp $b} grep {/^\d+\.list$/} readdir(DH);
@@ -24,8 +27,10 @@ foreach my $file (@files)
 	{
 		chomp($line);
 		my ($token, $count) = split(/\t/, $line);
-		next unless $count > $MINCOUNT;
-		if($linenum <= $MAXRANK)
+		next if stopped($token);
+		last if $count < $MINCOUNT;
+		#if($linenum <= $MAXRANK)
+		if($count >= $MINHOT)
 		{
 			$topdict{$token} = $file;
 		}
@@ -57,7 +62,21 @@ foreach my $file (@files)
 	{
 		my $count = 0;
 		$count = $lists{$file}->{$token} if defined $lists{$file}->{$token};
-		printf(",%d", $count);
+		printf(",%f", $count);
 	}
 	print "\n";
+}
+
+exit;
+
+sub stopped
+{
+	my $token = shift;
+	return 1 if $token =~ /\d+/;
+	foreach my $stopword (@STOPLIST)
+	{
+		return 1 if index($token, $stopword) >= 0;
+	}
+
+	return 0;
 }
