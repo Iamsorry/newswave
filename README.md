@@ -21,3 +21,7 @@ newswave
 	* ttv_1.pl	http://www.ttv.com.tw/
 	* tvbs_1.pl	http://news.tvbs.com.tw/
 	* udn_1.pl	http://udn.com/
+
+license
+========
+MIT http://g0v.mit-license.org/
