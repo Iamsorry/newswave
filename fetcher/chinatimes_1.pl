@@ -15,11 +15,15 @@ do
 	my @lines = split(/\n/, $response->decoded_content);
 
 	$link_count = 0;
-	foreach my $line (@lines)
+	for(my $i = 0; $i <= $#lines; $i++)
 	{
-		next unless $line =~ /<a href="(\/newspapers\/)(.*)(-\d+-\d+)" class=".*">/;
-		my ($uri1, $anchor, $uri2) = ($1, $2, $3);
-		printf "http://www.chinatimes.com%s0%s\t%s\n", $uri1, $uri2, $anchor;
+		my $line = $lines[$i];
+		next unless $line =~ /<a href="(\/newspapers\/[^"]+)" class=".*">/;
+		my $uri = $1;
+		$line = $lines[++$i];
+		$line =~ /^\s+(.*)<\/a>/;
+		my $anchor = $1;
+		printf "http://www.chinatimes.com%s\t%s\n", $uri, $anchor;
 		$link_count++;
 	}
 	$page++;
